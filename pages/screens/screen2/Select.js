@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
   text:{
     marginTop:20,
     textAlign:'center',
-    color:'white'
+    color:'black',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    fontSize: 18,
+    lineHeight: 21
   },
   tinyLogo:{
     width: 60,
