@@ -45,16 +45,15 @@ export const Screen3Style = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 300,
-        height: 70,
+        width: 350,
+        height: 62,
+        marginBottom: 18,
     },
 
     answerBtn: {
         backgroundColor: '#FFFFFF',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        width: 140,
-        height: 50,
+        width: 165,
+        height: 62,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -65,9 +64,10 @@ export const Screen3Style = StyleSheet.create({
     },
 
     answerBtn_text: {
-        color: '#0061C1',
+        color: '#F38B12',
         height: 20,
         fontWeight: 'bold',
-
+        fontSize: 20,
     }
+
 });
