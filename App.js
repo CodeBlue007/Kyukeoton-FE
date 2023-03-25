@@ -3,11 +3,14 @@
 // import Navigation from './pages/navigation/index';
 import * as React from "react";
 import Navigation from "./pages/navigation/index";
+import { RecoilRoot } from "recoil";
 
 
 function App() {
   return (
-    <Navigation />
+    <RecoilRoot>
+      <Navigation />
+    </RecoilRoot>
   );
 }
 
