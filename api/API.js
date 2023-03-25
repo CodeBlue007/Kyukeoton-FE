@@ -34,24 +34,6 @@ const del = async (url) => {
  * @param config : default = null, 이미지 보낼때만 "imgPost" 설정 > 'Content-Type': 'multipart/form-data' 설정
  * @returns : res.data 반환
  */
-const post = async (url, post: {}) => {
-  try {
-    const result = await instance.post(url, post);
-    return result.data;
-  } catch (error) {
-    if (error instanceof Error)
-      throw new Error(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${error.message}`);
-  }
-};
 
-const patch = async (url, patch: {}) => {
-  try {
-    const { data } = await instance.patch(url, patch);
-    return data;
-  } catch (error) {
-    if (error instanceof Error)
-      throw new Error(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${error.message}`);
-  }
-};
 
-export { get, del as delete, post, patch };
+export { get, del as delete };

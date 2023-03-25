@@ -39,7 +39,6 @@ function HomeScreen({ navigation }) {
         setTitle1(response.data[0])
         setTitle2(response.data[1])
         setTitle3(response.data[2])
-        console.log(response.data)
         setLoading(false);
       })
       .catch(function (error) {

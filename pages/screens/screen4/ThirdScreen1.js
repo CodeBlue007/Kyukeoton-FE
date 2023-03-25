@@ -35,7 +35,6 @@ const ThirdScreen1 = ({ navigation }) => {
 
     const fetchInitialData = async () => {
         const data = await API.get(`/categories/7/questions?page=0`);
-        console.log(data);
         setfullItems(data);
         setAnswerList(data.answers);
         setLoading(false);

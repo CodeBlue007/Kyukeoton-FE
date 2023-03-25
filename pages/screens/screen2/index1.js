@@ -64,7 +64,6 @@ function DetailsScreen1({ navigation }) {
   useEffect(() => {
     axios.get('http://13.124.233.9:8080/categories/3/questions?page=1')
       .then(function (response) {
-        console.log(response.data);
         setQues(response.data.questionImages)
         setContents(response.data.content)
         setAnswer(response.data.answers)
