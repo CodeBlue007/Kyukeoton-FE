@@ -47,8 +47,6 @@ const ThirdScreen4 = ({ navigation }) => {
     useEffect(() => {
         fetchInitialData();
 
-        console.log(durationTime);
-        console.log(durationCleanup);
 
         return durationCleanup.cleanUpFn();
 

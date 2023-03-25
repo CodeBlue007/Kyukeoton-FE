@@ -43,7 +43,6 @@ const SecondScreen4 = ({ navigation }) => {
     useEffect(() => {
         axios.get(`http://13.124.233.9:8080/categories/5/questions?page=3`)
             .then(({ data }) => {
-                console.log(data);
                 setfullItems(data);
                 setAnswerList(data.answers);
                 setLoading(false);
@@ -56,8 +55,6 @@ const SecondScreen4 = ({ navigation }) => {
             })
             .catch((err) => console.log(err))
 
-        console.log(durationTime);
-        console.log(durationCleanup);
 
         return durationCleanup.cleanUpFn();
 
