@@ -26,8 +26,8 @@ const Navigation = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "", headerStyle: { backgroundColor: '#0091EA' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' } }}
-        />
+
+          options={{ title: "그로우", headerStyle: { backgroundColor: '#0091EA' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' } }} />
 
         <Stack.Screen
           name="Details"
@@ -58,44 +58,44 @@ const Navigation = () => {
         <Stack.Screen
           name="SecondScreen1"
           component={SecondScreen1}
-          options={{ title: "시각적 주의력", headerBackVisible: false }}
+          options={{ title: "시각적 주의력", headerStyle: { backgroundColor: '#FF9900' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
         <Stack.Screen
           name="SecondScreen2"
           component={SecondScreen2}
-          options={{ title: "시각적 주의력", headerBackVisible: false }}
+          options={{ title: "시각적 주의력", headerStyle: { backgroundColor: '#FF9900' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
         <Stack.Screen
           name="SecondScreen3"
           component={SecondScreen3}
-          options={{ title: "시각적 주의력", headerBackVisible: false }}
+          options={{ title: "시각적 주의력", headerStyle: { backgroundColor: '#FF9900' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
         <Stack.Screen
           name="SecondScreen4"
           component={SecondScreen4}
-          options={{ title: "시각적 주의력", headerBackVisible: false }}
+          options={{ title: "시각적 주의력", headerStyle: { backgroundColor: '#FF9900' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
         <Stack.Screen
           name="ThirdScreen1"
           component={ThirdScreen1}
-          options={{ title: "수학적 사고력", headerBackVisible: false }}
+          options={{ title: "수학적 사고력", headerStyle: { backgroundColor: '#00BC4B' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
         <Stack.Screen
           name="ThirdScreen2"
           component={ThirdScreen2}
-          options={{ title: "수학적 사고력", headerBackVisible: false }}
+          options={{ title: "수학적 사고력", headerStyle: { backgroundColor: '#00BC4B' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
 
         <Stack.Screen
           name="ThirdScreen3"
           component={ThirdScreen3}
-          options={{ title: "수학적 사고력", headerBackVisible: false }}
+          options={{ title: "수학적 사고력", headerStyle: { backgroundColor: '#00BC4B' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
 
         <Stack.Screen
           name="ThirdScreen4"
           component={ThirdScreen4}
-          options={{ title: "수학적 사고력", headerBackVisible: false }}
+          options={{ title: "수학적 사고력", headerStyle: { backgroundColor: '#00BC4B' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' }, headerBackVisible: false }}
         />
 
 
