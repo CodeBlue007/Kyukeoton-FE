@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpacity,} from "react-native";
+import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpacity,Image} from "react-native";
 import React, {useState} from 'react';
 import Select from "./Select";
 import {LinearGradient} from "expo-linear-gradient"
@@ -11,6 +11,45 @@ function DetailsScreen({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct,setCorrect] = useState(false);
 
+  const [ques,setQues] =useState([
+    {
+      "name": "호랑이",
+      "url": "456"
+    },
+    {
+      "name": "토끼",
+      "url": "4567"
+    },
+    {
+      "name": "원숭이",
+      "url": "45678"
+    },
+    {
+      "name": "?",
+      "url": "456749"
+    }
+  ])
+
+  const [answer,setAnswer] = useState([
+    {
+      "content": "사자",
+      "isCorrect": false
+    },
+    {
+      "content": "물고기",
+      "isCorrect": true
+    },
+    {
+      "content": "새",
+      "isCorrect": false
+    },
+    {
+      "content": "오리",
+      "isCorrect": false
+    }
+  ])
+
+
     const onClick = useCallback(() => {
       navigation.navigate("Details1");
     }, [navigation]);
@@ -20,11 +59,19 @@ function DetailsScreen({ navigation }) {
     }
 
 
-    const open1 = ()=>{
+    // const open1 = ()=>{
+    //   setIsModalVisible(true)
+    //   setCorrect(true)
+    // }
+
+    const compare=(isCorrect)=>{
+      if(isCorrect !== correct){
+        setCorrect(true)
+      }
       setIsModalVisible(true)
-      setCorrect(true)
     }
 
+    
 
     return (
       <LinearGradient
@@ -35,53 +82,48 @@ function DetailsScreen({ navigation }) {
             <Text style={styles.title1}>‘?’에 적합한 그림이 무엇일까요?</Text>
             <Text style={styles.title2}>계절</Text>
           <View style={styles.selectImg}>
-            <View  style={{ flexDirection:'row'}}>
-              <TouchableHighlight style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
-              <TouchableHighlight  style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
+
+            <View style={{ flexDirection:'row'}}>
+              {ques.slice(0,2).map((val)=>
+                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
             </View>
             <View style={{ flexDirection:'row'}}>
-              <TouchableHighlight  style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.container}>
-                  <Select/>
-              </TouchableHighlight>
+              {ques.slice(2,4).map((val)=>
+                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
             </View>
+
           </View>
+
             <View style={styles.btn}>
-            <View style={{ flexDirection:'row'}}>
-              <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
-                    >
-                <Text style={styles.buttonText}>스키</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
-                    >
-                <Text style={styles.buttonText}>농구</Text>
-                </TouchableOpacity>
-            </View>
               <View style={{ flexDirection:'row'}}>
-                <TouchableOpacity
+              {answer.slice(0,2).map((val)=>
+                  <TouchableOpacity
                   style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
+                  onPress={() => compare(val.isCorrect)}
                     >
-                <Text style={styles.buttonText}>축구</Text>
+                  <Text style={styles.buttonText}>{val.content}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={open1}
-                    >
-                <Text style={styles.buttonText}>야구</Text>
-                </TouchableOpacity>
-               </View>
+              )}
               </View>
+
+              <View style={{ flexDirection:'row'}}>
+              {answer.slice(2,4).map((val)=>
+                  <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => compare(val.isCorrect)}
+                    >
+                  <Text style={styles.buttonText}>{val.content}</Text>
+                </TouchableOpacity>
+              )}
+              </View>
+
+            </View>
             <Modal
               animationType={"slide"}
               style={{width:40,height:10}}
@@ -91,7 +133,21 @@ function DetailsScreen({ navigation }) {
                   isModalVisible(!isModalVisible)
               }}
           >
-              <View style={styles.centeredView}>
+            <View style={styles.centeredView}>
+              {correct?
+                <View style={styles.centeredView3}>
+                  <Image
+                  style={styles.tinyLogo}
+                  source={require('../../../assets/Subtract.png')}
+                  />
+                  </View>:
+                  <View style={styles.centeredView2}>
+                    <Image
+                    style={styles.tinyLogo}
+                    source={require('../../../assets/Union.png')}
+                    />
+                  </View>}
+              
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{correct?'정답입니다.':'오답이에요'}</Text>
               <Text style={styles.modalText1}>{correct?'참 잘했어요':'정답 : 눈사람'}</Text>
@@ -169,6 +225,38 @@ function DetailsScreen({ navigation }) {
 modalView: {
 
   backgroundColor: 'white',
+  width:400,
+  padding: 35,
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5,
+},
+centeredView2: {
+  flex:1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  position:"relative",
+  bottom:100
+ 
+
+},
+centeredView3: {
+  flex:1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  position:"relative",
+  bottom:73
+ 
+
+},
+modalView2: {
+backgroundColor:'#ffffff',
   width:400,
   padding: 35,
   alignItems: 'center',

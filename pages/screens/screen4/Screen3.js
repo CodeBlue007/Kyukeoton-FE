@@ -35,7 +35,6 @@ const Screen3 = () => {
         setLoading(false);
         setAnswerList(['보기1', '보기2', '보기3', '보기4']);
 
-        console.log(Object.keys(temp[0]));
     }, []);
 
 

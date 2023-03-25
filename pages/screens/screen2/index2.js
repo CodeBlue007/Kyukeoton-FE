@@ -9,6 +9,44 @@ import {LinearGradient} from "expo-linear-gradient"
 function DetailsScreen2({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct,setCorrect] = useState(false);
+  const [ques,setQues] =useState([
+    {
+      "name": "호랑이",
+      "url": "456"
+    },
+    {
+      "name": "토끼",
+      "url": "4567"
+    },
+    {
+      "name": "원숭이",
+      "url": "45678"
+    },
+    {
+      "name": "?",
+      "url": "456749"
+    }
+  ])
+
+  const [answer,setAnswer] = useState([
+    {
+      "content": "사자",
+      "isCorrect": false
+    },
+    {
+      "content": "물고기",
+      "isCorrect": false
+    },
+    {
+      "content": "새",
+      "isCorrect": true
+    },
+    {
+      "content": "오리",
+      "isCorrect": false
+    }
+  ])
+
 
     const onClick = useCallback(() => {
       navigation.navigate("Details3");
@@ -19,10 +57,12 @@ function DetailsScreen2({ navigation }) {
     }
 
 
-    const open1 = ()=>{
-      setIsModalVisible(true)
-      setCorrect(true)
-    }
+    const compare=(isCorrect)=>{
+        if(isCorrect !== correct){
+          setCorrect(true)
+        }
+        setIsModalVisible(true)
+      }
 
 
     return (
@@ -34,52 +74,45 @@ function DetailsScreen2({ navigation }) {
             <Text style={styles.title1}>‘33333333333333</Text>
             <Text style={styles.title2}>계절</Text>
           <View style={styles.selectImg}>
-            <View  style={{ flexDirection:'row'}}>
-              <TouchableHighlight style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
-              <TouchableHighlight  style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
+
+            <View style={{ flexDirection:'row'}}>
+              {ques.slice(0,2).map((val)=>
+                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
             </View>
             <View style={{ flexDirection:'row'}}>
-              <TouchableHighlight  style={styles.container} onPress={onClick}>
-                  <Select/>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.container}>
-                  <Select/>
-              </TouchableHighlight>
+              {ques.slice(2,4).map((val)=>
+                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
             </View>
+
           </View>
             <View style={styles.btn}>
-            <View style={{ flexDirection:'row'}}>
-              <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
-                    >
-                <Text style={styles.buttonText}>스키</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
-                    >
-                <Text style={styles.buttonText}>농구</Text>
-                </TouchableOpacity>
-            </View>
-              <View style={{ flexDirection:'row'}}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setIsModalVisible(true)}
-                    >
-                <Text style={styles.buttonText}>축구</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={open1}
-                    >
-                <Text style={styles.buttonText}>야구</Text>
-                </TouchableOpacity>
-               </View>
+                <View style={{ flexDirection:'row'}}>
+                {answer.slice(0,2).map((val)=>
+                    <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => compare(val.isCorrect)}
+                        >
+                    <Text style={styles.buttonText}>{val.content}</Text>
+                    </TouchableOpacity>
+                )}
+                </View>
+
+                <View style={{ flexDirection:'row'}}>
+                {answer.slice(2,4).map((val)=>
+                    <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => compare(val.isCorrect)}
+                        >
+                    <Text style={styles.buttonText}>{val.content}</Text>
+                    </TouchableOpacity>
+                )}
+                </View>
               </View>
             <Modal
               animationType={"slide"}

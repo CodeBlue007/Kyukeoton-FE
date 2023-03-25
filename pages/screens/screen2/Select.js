@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableHighlight,StyleSheet, View,TouchableOpacity,Image } from "react-native";
 
-const Select = () => {
+const Select = ({data}) => {
   return (
         <View style={styles.box}>
           <View>
@@ -10,7 +10,7 @@ const Select = () => {
                     source={require('../../../assets/favicon.png')}
                     />
           </View>
-          <Text style={styles.text}>벛꽃</Text>
+          <Text style={styles.text}>{data.name}</Text>
         </View>
   )
 }
