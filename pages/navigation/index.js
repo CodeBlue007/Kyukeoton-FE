@@ -26,8 +26,8 @@ const Navigation = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "그로우", headerStyle: { backgroundColor: '#0091EA' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' } }}
-        />
+
+          options={{ title: "그로우", headerStyle: { backgroundColor: '#0091EA' }, headerTintColor: '#ffffff', headerTitleStyle: { fontSize: '30px' } }} />
 
         <Stack.Screen
           name="Details"

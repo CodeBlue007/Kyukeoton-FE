@@ -114,23 +114,21 @@ function DetailsScreen({ navigation }) {
         <Text style={styles.title2}>{contents.substring(19, 24)}</Text>
         <View style={styles.selectImg}>
 
-
-
-          <View style={{ flexDirection: 'row' }}>
-            {ques.slice(0, 2).map((val) =>
-              <TouchableHighlight style={styles.container} >
-                <Select data={val} />
-              </TouchableHighlight>
-            )}
+          <View style={{ flexDirection:'row'}}>
+              {ques.slice(0,2).map((val)=>
+                  <TouchableHighlight  style={styles.container} >
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
+            </View>
+            <View style={{ flexDirection:'row'}}>
+              {ques.slice(2,4).map((val)=>
+                  <TouchableHighlight  style={styles.container} >
+                    <Select data={val}/>
+                  </TouchableHighlight>
+              )}
+            </View>
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            {ques.slice(2, 4).map((val) =>
-              <TouchableHighlight style={styles.container} >
-                <Select data={val} />
-              </TouchableHighlight>
-            )}
-          </View>
-
 
           <View style={styles.btn}>
             <View style={{ flexDirection: 'row' }}>
@@ -160,33 +158,7 @@ function DetailsScreen({ navigation }) {
           <ProgressBar curNum={1} backGroundProp={'#0061C1'} />
         </View >
 
-        <View style={styles.btn}>
-          <View style={{ flexDirection: 'row' }}>
-            {answer.slice(0, 2).map((val) =>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => compare(val.isCorrect)}
-              >
-                <Text style={styles.buttonText}>{val.content}</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            {answer.slice(2, 4).map((val) =>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => compare(val.isCorrect)}
-              >
-                <Text style={styles.buttonText}>{val.content}</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-
-        </View>
-        <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details1"} navigation={navigation} solution={solution} />
-        <ProgressBar curNum={1} backGroundProp={'#0061C1'} />
-      </View >
+       
 
     </LinearGradient >
   );
