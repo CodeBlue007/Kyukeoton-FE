@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HomeScreen from "../screens/screen1"
 import DetailsScreen from "../screens/screen2"
 import SecondScreen from "../screens/screen3/SeondScreen"
+import Screen3 from "../screens/screen4/Screen3"
 
 const Stack = createNativeStackNavigator()
 const Navigation = () => {
@@ -24,7 +25,12 @@ const Navigation = () => {
         <Stack.Screen
           name="SecondScreen"
           component={SecondScreen}
-          options={{ title: "디테일", headerBackVisible: false }}
+          options={{ title: "스크린2", headerBackVisible: false }}
+        />
+        <Stack.Screen
+          name="ThirdScreen"
+          component={Screen3}
+          options={{ title: "스크린3", headerBackVisible: false }}
         />
 
 
