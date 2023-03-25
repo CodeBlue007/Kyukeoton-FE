@@ -102,10 +102,8 @@ function DetailsScreen1({ navigation }) {
               })
               .catch(function (error) {
                 console.log(error);
-              });
-
-              
-      },[])
+              })
+          },[]);
 
 
 
@@ -175,7 +173,7 @@ function DetailsScreen1({ navigation }) {
               </View>
           </LinearGradient>
           );
-}
+
           <View style={{ flexDirection: 'row' }}>
             {answer.slice(2, 4).map((val) =>
               <TouchableOpacity
