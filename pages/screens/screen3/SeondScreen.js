@@ -1,7 +1,6 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import { SecondScreenStyle } from "./SecondScreenStyle";
 import { useEffect, useState } from "react";
-import LinearGradient from 'react-native-linear-gradient';
 
 
 
@@ -30,7 +29,7 @@ const SecondScreen = () => {
 
 
     return (
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={SecondScreenStyle.container}>
+        <View style={SecondScreenStyle.container}>
             <Text style={SecondScreenStyle.title}>✔가 총 몇개일까요?</Text>
             <View style={SecondScreenStyle.gridBox}>
                 <View style={SecondScreenStyle.itemBox}>
@@ -68,7 +67,7 @@ const SecondScreen = () => {
                 )}
 
             </View>
-        </LinearGradient >
+        </View >
     )
 }
 
