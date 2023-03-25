@@ -1,6 +1,9 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import { SecondScreenStyle } from "./SecondScreenStyle";
 import { useEffect, useState } from "react";
+import { LinearGradient } from "expo-linear-gradient"
+import ProgressBar from "../../components/ProgressBar"
+import * as API from "../../../api/API"
 
 
 
@@ -18,7 +21,13 @@ const SecondScreen = () => {
         return [...IconList];
     }
 
+    const fetchData = async () => {
+        const data = await API.get('/categories');
+        return data;
+    }
+
     useEffect(() => {
+
         setIconInfo(makeData());
         setAnswerList(['보기1', '보기2', '보기3', '보기4']);
         setLoading(false);
@@ -29,7 +38,7 @@ const SecondScreen = () => {
 
 
     return (
-        <View style={SecondScreenStyle.container}>
+        <LinearGradient colors={['#F39912', '#FFCC00', '#FFCC00']} style={SecondScreenStyle.container}>
             <Text style={SecondScreenStyle.title}>✔가 총 몇개일까요?</Text>
             <View style={SecondScreenStyle.gridBox}>
                 <View style={SecondScreenStyle.itemBox}>
@@ -65,9 +74,9 @@ const SecondScreen = () => {
                     ><Text style={SecondScreenStyle.answerBtn_text}>{val}</Text>
                     </TouchableOpacity>
                 )}
-
             </View>
-        </View >
+            <ProgressBar curNum={1} backGroundProp={'#F39C12'} />
+        </LinearGradient>
     )
 }
 

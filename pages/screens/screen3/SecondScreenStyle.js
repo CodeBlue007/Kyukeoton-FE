@@ -16,6 +16,7 @@ export const SecondScreenStyle = StyleSheet.create({
         fontSize: 24,
         marginTop: 40,
         marginBottom: 30,
+        color: '#FFFFFF',
     },
 
     gridBox: {
@@ -72,7 +73,7 @@ export const SecondScreenStyle = StyleSheet.create({
         color: '#F38B12',
         height: 20,
         fontWeight: 'bold',
-
+        fontSize: 20,
     }
 
 
