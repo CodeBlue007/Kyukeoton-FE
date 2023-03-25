@@ -37,21 +37,19 @@ const ThirdScreen4 = ({ navigation }) => {
         setAnswerList(data.answers);
         setLoading(false);
         const arr = data.answers
-                arr.map((item) => {
-                if (item.isCorrect === true) {
-                    setSolution(item.content)
-                }
-                })
+        arr.map((item) => {
+            if (item.isCorrect === true) {
+                setSolution(item.content)
+            }
+        })
     }
 
     useEffect(() => {
         fetchInitialData();
 
-        console.log(durationTime);
-        console.log(durationCleanup);
+
 
         return durationCleanup.cleanUpFn();
-
     }, []);
 
 

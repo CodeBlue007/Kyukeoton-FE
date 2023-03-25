@@ -49,18 +49,14 @@ const SecondScreen4 = ({ navigation }) => {
                 setLoading(false);
                 const arr = data.answers
                 arr.map((item) => {
-                if (item.isCorrect === true) {
-                    setSolution(item.content)
-                }
+                    if (item.isCorrect === true) {
+                        setSolution(item.content)
+                    }
                 })
             })
             .catch((err) => console.log(err))
 
-        console.log(durationTime);
-        console.log(durationCleanup);
-
         return durationCleanup.cleanUpFn();
-
     }, []);
 
 
