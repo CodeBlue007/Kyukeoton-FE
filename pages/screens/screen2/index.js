@@ -62,11 +62,10 @@ function DetailsScreen({ navigation }) {
   //   setCorrect(true)
   // }
 
-  const compare = (isCorrect, name) => {
-    if (isCorrect !== correct) {
+  const compare=(isCorrect)=>{
+    if(isCorrect !== correct){
       setCorrect(true)
     }
-    setSolution(name)
     setIsModalVisible(true)
   }
 
@@ -166,7 +165,7 @@ function DetailsScreen({ navigation }) {
             {answer.slice(0, 2).map((val) =>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => compare(val.isCorrect, val.content)}
+                onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
               </TouchableOpacity>
@@ -177,7 +176,7 @@ function DetailsScreen({ navigation }) {
             {answer.slice(2, 4).map((val) =>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => compare(val.isCorrect, val.content)}
+                onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
               </TouchableOpacity>
