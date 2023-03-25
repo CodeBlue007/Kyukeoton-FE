@@ -5,59 +5,79 @@ import Select from "./Select";
 import {LinearGradient} from "expo-linear-gradient"
 import Modall from "../../components/Modall";
 import ProgressBar from "../../components/ProgressBar"
-
+import axios from 'axios'
 
 function DetailsScreen2({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct,setCorrect] = useState(false);
   const [solution,setSolution] = useState('')
+  const [contents,setContents] = useState('')
   const [ques,setQues] =useState([
-    {
-      "name": "호랑이",
-      "url": "456"
-    },
-    {
-      "name": "토끼",
-      "url": "4567"
-    },
-    {
-      "name": "원숭이",
-      "url": "45678"
-    },
-    {
-      "name": "?",
-      "url": "456749"
-    }
+    // {
+    //   "name": "호랑이",
+    //   "url": "456"
+    // },
+    // {
+    //   "name": "토끼",
+    //   "url": "4567"
+    // },
+    // {
+    //   "name": "원숭이",
+    //   "url": "45678"
+    // },
+    // {
+    //   "name": "?",
+    //   "url": "456749"
+    // }
   ])
 
   const [answer,setAnswer] = useState([
-    {
-      "content": "사자",
-      "isCorrect": false
-    },
-    {
-      "content": "물고기",
-      "isCorrect": false
-    },
-    {
-      "content": "새",
-      "isCorrect": true
-    },
-    {
-      "content": "오리",
-      "isCorrect": false
-    }
+    // {
+    //   "content": "사자",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "물고기",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "새",
+    //   "isCorrect": true
+    // },
+    // {
+    //   "content": "오리",
+    //   "isCorrect": false
+    // }
   ])
 
 
  
-    const compare=(isCorrect,name)=>{
+    const compare=(isCorrect)=>{
         if(isCorrect !== correct){
           setCorrect(true)
         }
-        setSolution(name)
         setIsModalVisible(true)
       }
+
+      useEffect(()=>{
+        axios.get('http://13.124.233.9:8080/categories/3/questions?page=2')
+          .then(function (response) {
+            console.log(response.data);
+            setQues(response.data.questionImages)
+            setContents(response.data.content)
+            setAnswer(response.data.answers)
+            const arr = response.data.answers
+            arr.map((item)=>{
+                if(item.isCorrect === true){
+                  setSolution(item.content)
+                }
+              })
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },[])
+  
 
 
     return (
@@ -66,8 +86,8 @@ function DetailsScreen2({ navigation }) {
         style={styles.container1}
         >
         <View style={{ position:'relative',flex: 1, alignItems: "center"}}>
-            <Text style={styles.title1}>‘33333333333333</Text>
-            <Text style={styles.title2}>계절</Text>
+            <Text style={styles.title1}>{contents.substring(0,19)}</Text>
+            <Text style={styles.title2}>{contents.substring(19,24)}</Text>
           <View style={styles.selectImg}>
 
             <View style={{ flexDirection:'row'}}>
@@ -91,7 +111,7 @@ function DetailsScreen2({ navigation }) {
                 {answer.slice(0,2).map((val)=>
                     <TouchableOpacity
                     style={styles.button}
-                    onPress={() => compare(val.isCorrect,val.content)}
+                    onPress={() => compare(val.isCorrect)}
                         >
                     <Text style={styles.buttonText}>{val.content}</Text>
                     </TouchableOpacity>
@@ -102,7 +122,7 @@ function DetailsScreen2({ navigation }) {
                 {answer.slice(2,4).map((val)=>
                     <TouchableOpacity
                     style={styles.button}
-                    onPress={() => compare(val.isCorrect,val.content)}
+                    onPress={() => compare(val.isCorrect)}
                         >
                     <Text style={styles.buttonText}>{val.content}</Text>
                     </TouchableOpacity>
