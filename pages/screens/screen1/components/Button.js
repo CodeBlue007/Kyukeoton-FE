@@ -5,10 +5,10 @@ const Button = ({ num, navigation }) => {
 
   const handleToSecond = () => {
     if (num === 2) {
-      navigation.navigate("SecondScreen", { categoryId: 5 });
+      navigation.navigate("SecondScreen1", { categoryId: 5 });
     }
     else if (num === 3) {
-      navigation.navigate("ThirdScreen", { categoryId: 7 });
+      navigation.navigate("ThirdScreen1");
     }
   }
   return (
