@@ -11,13 +11,13 @@ import axios from 'axios'
 
 
 function DetailsScreen3({ navigation }) {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [correct,setCorrect] = useState(false);
-    const [solution,setSolution] = useState('')
-    const [durationTime, setDurationTime] = useRecoilState(DurationTime);
-    const [durationCleanup, setDurationCleanup] = useRecoilState(DurationCleanUp);
-    const [contents,setContents] = useState('')
-    const [ques,setQues] =useState([
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [correct, setCorrect] = useState(false);
+  const [solution, setSolution] = useState('')
+  const [durationTime, setDurationTime] = useRecoilState(DurationTime);
+  const [durationCleanup, setDurationCleanup] = useRecoilState(DurationCleanUp);
+  const [contents, setContents] = useState('')
+  const [ques, setQues] = useState([
     // {
     //   "name": "호랑이",
     //   "url": "456"
@@ -56,8 +56,8 @@ function DetailsScreen3({ navigation }) {
   ])
 
 
-  const compare=(isCorrect)=>{
-    if(isCorrect !== correct){
+  const compare = (isCorrect) => {
+    if (isCorrect !== correct) {
       setCorrect(true)
     }
     setIsModalVisible(true)
