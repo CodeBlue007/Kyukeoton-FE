@@ -7,71 +7,62 @@ import Modall from "../../components/Modall";
 import ProgressBar from "../../components/ProgressBar"
 import { DurationTime, DurationCleanUp } from "../../../atom";
 import { useRecoilState } from "recoil";
-
-
+import axios from 'axios'
 
 
 function DetailsScreen3({ navigation }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [correct, setCorrect] = useState(false);
-  const [solution, setSolution] = useState('');
-  const [durationTime, setDurationTime] = useRecoilState(DurationTime);
-  const [durationCleanup, setDurationCleanup] = useRecoilState(DurationCleanUp);
-
-  const [ques, setQues] = useState([
-    {
-      "name": "호랑이",
-      "url": "456"
-    },
-    {
-      "name": "토끼",
-      "url": "4567"
-    },
-    {
-      "name": "원숭이",
-      "url": "45678"
-    },
-    {
-      "name": "?",
-      "url": "456749"
-    }
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [correct,setCorrect] = useState(false);
+    const [solution,setSolution] = useState('')
+    const [durationTime, setDurationTime] = useRecoilState(DurationTime);
+    const [durationCleanup, setDurationCleanup] = useRecoilState(DurationCleanUp);
+    const [contents,setContents] = useState('')
+    const [ques,setQues] =useState([
+    // {
+    //   "name": "호랑이",
+    //   "url": "456"
+    // },
+    // {
+    //   "name": "토끼",
+    //   "url": "4567"
+    // },
+    // {
+    //   "name": "원숭이",
+    //   "url": "45678"
+    // },
+    // {
+    //   "name": "?",
+    //   "url": "456749"
+    // }
   ])
 
   const [answer, setAnswer] = useState([
-    {
-      "content": "사자",
-      "isCorrect": false
-    },
-    {
-      "content": "물고기",
-      "isCorrect": false
-    },
-    {
-      "content": "새",
-      "isCorrect": false
-    },
-    {
-      "content": "오리",
-      "isCorrect": true
-    }
+    // {
+    //   "content": "사자",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "물고기",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "새",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "오리",
+    //   "isCorrect": true
+    // }
   ])
 
 
-  const compare = (isCorrect, name) => {
-    if (isCorrect !== correct) {
+  const compare=(isCorrect)=>{
+    if(isCorrect !== correct){
       setCorrect(true)
     }
-    setSolution(name)
     setIsModalVisible(true)
   }
 
-  useEffect(() => {
-
-    console.log(durationTime);
-    console.log(durationCleanup);
-
-    return durationCleanup.cleanUpFn();
-  }, [])
 
   useEffect(() => {
     axios.get('http://13.124.233.9:8080/categories/3/questions?page=3')

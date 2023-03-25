@@ -12,6 +12,7 @@ function DetailsScreen1({ navigation }) {
   const [correct, setCorrect] = useState(false);
   const [solution, setSolution] = useState('')
 
+  const [contents, setContents] = useState('')
   const [ques, setQues] = useState([
     // {
     //   "name": "호랑이",
@@ -53,13 +54,32 @@ function DetailsScreen1({ navigation }) {
 
 
 
-  const compare = (isCorrect, name) => {
+  const compare = (isCorrect) => {
     if (isCorrect !== correct) {
       setCorrect(true)
     }
-    setSolution(name)
     setIsModalVisible(true)
   }
+
+  useEffect(() => {
+    axios.get('http://13.124.233.9:8080/categories/3/questions?page=1')
+      .then(function (response) {
+        console.log(response.data);
+        setQues(response.data.questionImages)
+        setContents(response.data.content)
+        setAnswer(response.data.answers)
+        const arr = response.data.answers
+        arr.map((item) => {
+          if (item.isCorrect === true) {
+            setSolution(item.content)
+          }
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
+
 
   return (
     <LinearGradient
@@ -67,8 +87,8 @@ function DetailsScreen1({ navigation }) {
       style={styles.container1}
     >
       <View style={{ position: 'relative', flex: 1, alignItems: "center" }}>
-        <Text style={styles.title1}>‘22222?</Text>
-        <Text style={styles.title2}>계절</Text>
+        <Text style={styles.title1}>{contents.substring(0, 19)}</Text>
+        <Text style={styles.title2}>{contents.substring(19, 24)}</Text>
         <View style={styles.selectImg}>
 
           <View style={{ flexDirection: 'row' }}>
@@ -85,99 +105,24 @@ function DetailsScreen1({ navigation }) {
               </TouchableHighlight>
             )}
           </View>
+        </View>
+        <View style={styles.btn}>
+          <View style={{ flexDirection: 'row' }}>
+            {answer.slice(0, 2).map((val) =>
+              <TouchableOpacity
+                style={styles.button}
 
-      useEffect(()=>{
-            axios.get('http://13.124.233.9:8080/categories/3/questions?page=1')
-              .then(function (response) {
-                console.log(response.data);
-                setQues(response.data.questionImages)
-                setContents(response.data.content)
-                setAnswer(response.data.answers)
-                const arr = response.data.answers
-                arr.map((item) => {
-                  if (item.isCorrect === true) {
-                    setSolution(item.content)
-                  }
-                })
-              })
-              .catch(function (error) {
-                console.log(error);
-              })
-          },[]);
-
-
-
-          return (
-          <LinearGradient
-            colors={['#0091EA', '#9EDAFF']}
-            style={styles.container1}
-          >
-            <View style={{ position: 'relative', flex: 1, alignItems: "center" }}>
-              <Text style={styles.title1}>{contents.substring(0, 19)}</Text>
-              <Text style={styles.title2}>{contents.substring(19, 24)}</Text>
-              <View style={styles.selectImg}>
-
-                <View style={{ flexDirection: 'row' }}>
-                  {ques.slice(0, 2).map((val) =>
-                    <TouchableHighlight style={styles.container} >
-                      <Select data={val} />
-                    </TouchableHighlight>
-                  )}
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                  {ques.slice(2, 4).map((val) =>
-                    <TouchableHighlight style={styles.container} >
-                      <Select data={val} />
-                    </TouchableHighlight>
-                  )}
-                </View>
-
-              </View>
-
-              <View style={styles.btn}>
-                <View style={{ flexDirection: 'row' }}>
-                  {answer.slice(0, 2).map((val) =>
-                    <TouchableOpacity
-                      style={styles.button}
-                      onPress={() => compare(val.isCorrect, val.content)}
-                    >
-                      <Text style={styles.buttonText}>{val.content}</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-                <View style={styles.btn}>
-                  <View style={{ flexDirection: 'row' }}>
-                    {answer.slice(0, 2).map((val) =>
-                      <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => compare(val.isCorrect)}
-                      >
-                        <Text style={styles.buttonText}>{val.content}</Text>
-                      </TouchableOpacity>
-                    )}
-                  </View>
-
-                  <View style={{ flexDirection: 'row' }}>
-                    {answer.slice(2, 4).map((val) =>
-                      <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => compare(val.isCorrect, val.content)}
-                      >
-                        <Text style={styles.buttonText}>{val.content}</Text>
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                </View>
-                <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details2"} navigation={navigation} solution={solution} />
-                <ProgressBar curNum={2} backGroundProp={'#0061C1'} />
-              </View>
-          </LinearGradient>
-          );
-
+                onPress={() => compare(val.isCorrect)}
+              >
+                <Text style={styles.buttonText}>{val.content}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
           <View style={{ flexDirection: 'row' }}>
             {answer.slice(2, 4).map((val) =>
               <TouchableOpacity
                 style={styles.button}
+
                 onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
@@ -191,7 +136,6 @@ function DetailsScreen1({ navigation }) {
     </LinearGradient>
   );
 }
-
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
