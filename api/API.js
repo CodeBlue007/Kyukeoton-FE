@@ -1,8 +1,8 @@
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://13.124.233.9:8080';
 const instance = axios.create();
 
-axios.defaults.baseURL = 'http://13.124.233.9:8080';
 instance.defaults.headers['Content-Type'] = 'application/json';
 
 
@@ -11,8 +11,9 @@ const get = async (url) => {
     const { data } = await instance.get(url);
     return data;
   } catch (error) {
-    if (error instanceof Error)
-      throw new Error(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${error.message}`);
+    if (error instanceof Error) {
+      console.log(error);
+    }
   }
 };
 

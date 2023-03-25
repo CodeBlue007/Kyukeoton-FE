@@ -3,75 +3,78 @@ import { SecondScreenStyle } from "./SecondScreenStyle";
 import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient"
 import ProgressBar from "../../components/ProgressBar"
+import Spinner from "../../components/Spinner";
 import * as API from "../../../api/API"
+import axios from "axios";
 
 
 
-const SecondScreen = () => {
+const SecondScreen = ({ route }) => {
 
-    const [iconInfo, setIconInfo] = useState([]);
+    const { params: { categoryId } } = route;
+
+    const [fullItems, setfullItems] = useState([]);
     const [answerList, setAnswerList] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
-    const makeData = () => {
-        const IconList = [];
-        for (let i = 1; i <= 36; i++) {
-            IconList.push("✔");
-        }
-        return [...IconList];
+
+    const fetchInitialData = async () => {
+        const data = await API.get(`/categories/${categoryId}/questions?page=2`);
+        setLoading(false);
+        setfullItems(data);
+        setAnswerList(data.answers);
     }
 
-    const fetchData = async () => {
-        const data = await API.get('/categories');
-        return data;
-    }
 
     useEffect(() => {
+        axios.get(`http://13.124.233.9:8080/categories/${categoryId}/questions?page=2`)
+            .then(({ data }) => {
+                console.log(data);
+                setfullItems(data);
+                setAnswerList(data.answers);
+                setLoading(false);
+            })
+            .catch((err) => console.log(err))
 
-        setIconInfo(makeData());
-        setAnswerList(['보기1', '보기2', '보기3', '보기4']);
-        setLoading(false);
+        console.log(categoryId);
 
-    }, [])
+    }, []);
 
-    if (isLoading) return <Text>로딩중</Text>
+    const handleClick = (isCorrect) => {
+        if (isCorrect) {
+            alert("정답");
+            return;
+        }
+        else {
+            alert("오답");
+            return;
+        }
+    }
 
+
+
+    if (isLoading) {
+        return (<Spinner />)
+    }
 
     return (
         <LinearGradient colors={['#F39912', '#FFCC00', '#FFCC00']} style={SecondScreenStyle.container}>
-            <Text style={SecondScreenStyle.title}>✔가 총 몇개일까요?</Text>
+            <Text style={SecondScreenStyle.title}>{fullItems.content}</Text>
             <View style={SecondScreenStyle.gridBox}>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(0, 6).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(6, 12).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(12, 18).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(18, 24).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(24, 30).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
-                <View style={SecondScreenStyle.itemBox}>
-                    {iconInfo.slice(30, 36).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
-                </View>
+
             </View>
 
             <View style={SecondScreenStyle.answerBox}>
-                {answerList.slice(0, 2).map((val, idx) =>
-                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${val}-${idx}`} onPress={() => alert("hi")}
-                    ><Text style={SecondScreenStyle.answerBtn_text}>{val}</Text>
+                {answerList.slice(0, 2).map(({ content, isCorrect }, idx) =>
+                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${content}-${idx}`} onPress={() => handleClick(isCorrect)}
+                    ><Text style={SecondScreenStyle.answerBtn_text}>{content}</Text>
                     </TouchableOpacity>
                 )}
             </View>
             <View style={SecondScreenStyle.answerBox}>
-                {answerList.slice(2, 4).map((val, idx) =>
-                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${val}-${idx}`} onPress={() => alert("hi")}
-                    ><Text style={SecondScreenStyle.answerBtn_text}>{val}</Text>
+                {answerList.slice(2, 4).map(({ content, isCorrect }, idx) =>
+                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${content}-${idx}`} onPress={() => handleClick(isCorrect)}
+                    ><Text style={SecondScreenStyle.answerBtn_text}>{content}</Text>
                     </TouchableOpacity>
                 )}
             </View>
