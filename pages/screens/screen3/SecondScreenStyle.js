@@ -10,7 +10,6 @@ export const SecondScreenStyle = StyleSheet.create({
         alignItems: 'center',
         height: '100%',
         flexDirection: 'column',
-        backgroundColor: '#0091EA',
     },
 
     title: {
@@ -23,9 +22,9 @@ export const SecondScreenStyle = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         width: 300,
-        height: 400,
-        marginBottom: 12,
+        height: 300,
         backgroundColor: '#D9D9D9',
+        marginBottom: 40,
     },
 
     itemBox: {
@@ -48,23 +47,31 @@ export const SecondScreenStyle = StyleSheet.create({
     },
 
     answerBox: {
-        marginTop: 70,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 300,
-        height: 100,
+        width: 350,
+        height: 62,
+        marginBottom: 18,
     },
 
     answerBtn: {
         backgroundColor: '#FFFFFF',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        width: 160,
-        height: 60,
-        color: '#0061C1',
+        width: 165,
+        height: 62,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopRightRadius: 16,
+        borderTopLeftRadius: 16,
+        borderBottomRightRadius: 16,
+        borderBottomLeftRadius: 16,
+    },
 
-
+    answerBtn_text: {
+        color: '#F38B12',
+        height: 20,
+        fontWeight: 'bold',
 
     }
 

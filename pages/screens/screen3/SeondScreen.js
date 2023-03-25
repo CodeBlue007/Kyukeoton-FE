@@ -1,6 +1,7 @@
-import { Text, View, Button } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { SecondScreenStyle } from "./SecondScreenStyle";
 import { useEffect, useState } from "react";
+import LinearGradient from 'react-native-linear-gradient';
 
 
 
@@ -8,6 +9,7 @@ const SecondScreen = () => {
 
     const [iconInfo, setIconInfo] = useState([]);
     const [answerList, setAnswerList] = useState([]);
+    const [isLoading, setLoading] = useState(true);
 
     const makeData = () => {
         const IconList = [];
@@ -19,15 +21,18 @@ const SecondScreen = () => {
 
     useEffect(() => {
         setIconInfo(makeData());
-        setAnswerList(['보기1', '보기2', '보기3', '보기4'])
+        setAnswerList(['보기1', '보기2', '보기3', '보기4']);
+        setLoading(false);
 
     }, [])
 
+    if (isLoading) return <Text>로딩중</Text>
+
 
     return (
-        <View style={SecondScreenStyle.container}>
+        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={SecondScreenStyle.container}>
             <Text style={SecondScreenStyle.title}>✔가 총 몇개일까요?</Text>
-            <View style={SecondScreenStyle.fullBox}>
+            <View style={SecondScreenStyle.gridBox}>
                 <View style={SecondScreenStyle.itemBox}>
                     {iconInfo.slice(0, 6).map((val, idx) => <View style={SecondScreenStyle.eachItem} key={`${val}-${idx}`}><Text>{val}</Text></View>)}
                 </View>
@@ -49,11 +54,21 @@ const SecondScreen = () => {
             </View>
 
             <View style={SecondScreenStyle.answerBox}>
-                {answerList.slice(0, 2).map((val) =>
-                    <Button style={SecondScreenStyle.answerBtn} title={val} onPress={() => console.log('Button with adjusted color pressed')} />
+                {answerList.slice(0, 2).map((val, idx) =>
+                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${val}-${idx}`} onPress={() => alert("hi")}
+                    ><Text style={SecondScreenStyle.answerBtn_text}>{val}</Text>
+                    </TouchableOpacity>
                 )}
             </View>
-        </View>
+            <View style={SecondScreenStyle.answerBox}>
+                {answerList.slice(2, 4).map((val, idx) =>
+                    <TouchableOpacity style={SecondScreenStyle.answerBtn} key={`${val}-${idx}`} onPress={() => alert("hi")}
+                    ><Text style={SecondScreenStyle.answerBtn_text}>{val}</Text>
+                    </TouchableOpacity>
+                )}
+
+            </View>
+        </LinearGradient >
     )
 }
 
