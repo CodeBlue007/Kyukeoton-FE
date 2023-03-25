@@ -1,30 +1,32 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const Button = ({num}) => {
+const Button = ({ num, navigation }) => {
+
+  const handleToSecond = () => {
+    navigation.navigate("SecondScreen");
+  }
   return (
     <TouchableOpacity
-    style={styles.button}
-    onPress={() => alert("Click!")}
-      >
-        <Text style={{ fontSize: 24, color: "white",textAlign:'center' }}>{num}</Text>
+      style={styles.button}
+      onPress={() => handleToSecond()}
+    >
+      <Text style={{ fontSize: 24, color: "white", textAlign: 'center' }}>{num}</Text>
     </TouchableOpacity>
   )
 }
 
-export default Button
+export default Button;
 
 
 const styles = StyleSheet.create({
-    button:{
-        backgroundColor: "#4B778D",
-        padding: 18,
-        margin: 10,
-        borderRadius: 8,
-        width:250,
-        display:'flex',
-        justifyContent:'center',
-
-    }
-  });
-  
+  button: {
+    backgroundColor: "#4B778D",
+    padding: 18,
+    margin: 10,
+    borderRadius: 8,
+    width: 250,
+    display: 'flex',
+    justifyContent: 'center',
+  }
+});
