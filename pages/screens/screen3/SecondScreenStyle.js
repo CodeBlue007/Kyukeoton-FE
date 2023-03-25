@@ -18,14 +18,11 @@ export const SecondScreenStyle = StyleSheet.create({
         marginBottom: 30,
         color: '#FFFFFF',
     },
-
-    gridBox: {
-        display: 'flex',
-        flexDirection: 'column',
+    ImgBox: {
+        backgroundColor: "#FFFFFF",
         width: 300,
         height: 300,
-        backgroundColor: '#D9D9D9',
-        marginBottom: 40,
+        marginBottom: 25,
     },
 
     itemBox: {
@@ -78,3 +75,5 @@ export const SecondScreenStyle = StyleSheet.create({
 
 
 });
+
+
