@@ -3,13 +3,15 @@ import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpac
 import React, {useState} from 'react';
 import Select from "./Select";
 import {LinearGradient} from "expo-linear-gradient"
-
-
+import Modall from "../../components/Modall";
+import axios from 'axios'
+import ProgressBar from "../../components/ProgressBar"
 
 
 function DetailsScreen({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct,setCorrect] = useState(false);
+  const [solution,setSolution] = useState('')
 
   const [ques,setQues] =useState([
     {
@@ -50,28 +52,30 @@ function DetailsScreen({ navigation }) {
   ])
 
 
-    const onClick = useCallback(() => {
-      navigation.navigate("Details1");
-    }, [navigation]);
-
-    const close = ()=>{
-      setIsModalVisible(false)
-    }
-
 
     // const open1 = ()=>{
     //   setIsModalVisible(true)
     //   setCorrect(true)
     // }
 
-    const compare=(isCorrect)=>{
+    const compare=(isCorrect,name)=>{
       if(isCorrect !== correct){
         setCorrect(true)
       }
+      setSolution(name)
       setIsModalVisible(true)
     }
-
     
+    useEffect(()=>{
+      axios.get('http://13.124.233.9:8080/categories/3/questions?page=2')
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },[])
+
 
     return (
       <LinearGradient
@@ -85,27 +89,27 @@ function DetailsScreen({ navigation }) {
 
             <View style={{ flexDirection:'row'}}>
               {ques.slice(0,2).map((val)=>
-                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                  <TouchableHighlight  style={styles.container} >
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
             </View>
             <View style={{ flexDirection:'row'}}>
               {ques.slice(2,4).map((val)=>
-                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                  <TouchableHighlight  style={styles.container} >
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
             </View>
 
           </View>
-
+          
             <View style={styles.btn}>
               <View style={{ flexDirection:'row'}}>
               {answer.slice(0,2).map((val)=>
                   <TouchableOpacity
                   style={styles.button}
-                  onPress={() => compare(val.isCorrect)}
+                  onPress={() => compare(val.isCorrect,val.content)}
                     >
                   <Text style={styles.buttonText}>{val.content}</Text>
                 </TouchableOpacity>
@@ -116,7 +120,7 @@ function DetailsScreen({ navigation }) {
               {answer.slice(2,4).map((val)=>
                   <TouchableOpacity
                   style={styles.button}
-                  onPress={() => compare(val.isCorrect)}
+                  onPress={() => compare(val.isCorrect,val.content)}
                     >
                   <Text style={styles.buttonText}>{val.content}</Text>
                 </TouchableOpacity>
@@ -124,45 +128,10 @@ function DetailsScreen({ navigation }) {
               </View>
 
             </View>
-            <Modal
-              animationType={"slide"}
-              style={{width:40,height:10}}
-              transparent={true}
-              visible={isModalVisible}
-              onRequestClose={() => {
-                  isModalVisible(!isModalVisible)
-              }}
-          >
-            <View style={styles.centeredView}>
-              {correct?
-                <View style={styles.centeredView3}>
-                  <Image
-                  style={styles.tinyLogo}
-                  source={require('../../../assets/Subtract.png')}
-                  />
-                  </View>:
-                  <View style={styles.centeredView2}>
-                    <Image
-                    style={styles.tinyLogo}
-                    source={require('../../../assets/Union.png')}
-                    />
-                  </View>}
-              
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>{correct?'정답입니다.':'오답이에요'}</Text>
-              <Text style={styles.modalText1}>{correct?'참 잘했어요':'정답 : 눈사람'}</Text>
-              <Pressable
-                style={correct?[styles.button1, styles.buttonClose]:[styles.button1, styles.button1Close]}
-                onPress={()=>{
-                  close()
-                  onClick()
-                }}>
-                <Text style={styles.textStyle}>계속하기</Text>
-              </Pressable>
-            </View>
-          </View>
-          </Modal>
+            <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details1"} navigation={navigation} solution={solution}/>
+            <ProgressBar curNum={1} backGroundProp={'#0061C1'} />
         </View>
+        
       </LinearGradient>
     );
  }
