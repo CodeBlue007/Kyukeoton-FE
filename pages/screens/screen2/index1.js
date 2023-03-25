@@ -103,6 +103,8 @@ function DetailsScreen1({ navigation }) {
               .catch(function (error) {
                 console.log(error);
               });
+
+              
       },[])
 
 

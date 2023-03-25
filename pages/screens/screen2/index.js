@@ -10,9 +10,6 @@ import { useRecoilState } from "recoil";
 import { DurationTime, DurationCleanUp } from "../../../atom";
 
 
-
-
-
 function DetailsScreen({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct, setCorrect] = useState(false);

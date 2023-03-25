@@ -90,6 +90,8 @@ function DetailsScreen3({ navigation }) {
       .catch(function (error) {
         console.log(error);
       });
+
+    return durationCleanup.cleanUpFn();
   }, [])
 
   return (

@@ -3,14 +3,6 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const Button = ({ num, navigation }) => {
 
-  const handleToSecond = () => {
-    if (num === 2) {
-      navigation.navigate("SecondScreen", { categoryId: 5 });
-    }
-    else if (num === 3) {
-      navigation.navigate("ThirdScreen1");
-    }
-  }
   return (
     <TouchableOpacity
       style={styles.button}
