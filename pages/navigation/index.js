@@ -10,15 +10,17 @@ const Navigation = ()=>{
         <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ title: "홈" }}
-          />
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "메인",headerStyle:{backgroundColor:'red'},headerTintColor:'blue',headerTitleStyle:{fontSize:'30px'}}}
+            />
+
           <Stack.Screen
             name="Details"
             component={DetailsScreen}
-            options={{ title: "디테일" }}
+            options={{ title: "디테일",headerBackVisible:false}}
           />
+          
         </Stack.Navigator>
       </NavigationContainer>
     )
