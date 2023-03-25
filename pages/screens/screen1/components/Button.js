@@ -4,7 +4,10 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 const Button = ({ num, navigation }) => {
 
   const handleToSecond = () => {
-    if (num === 2) {
+    if(num === 1){
+      navigation.navigate("Details");
+    }
+    else if (num === 2) {
       navigation.navigate("SecondScreen", { categoryId: 5 });
     }
     else if (num === 3) {
