@@ -39,7 +39,6 @@ const SecondScreen1 = ({ navigation, route }) => {
         if (isCorrect !== correct) {
             setCorrect(true)
         }
-        setSolution(name);
         setIsModalVisible(true);
     }
 
@@ -60,6 +59,12 @@ const SecondScreen1 = ({ navigation, route }) => {
                 setfullItems(data);
                 setAnswerList(data.answers);
                 setLoading(false);
+                const arr = data.answers
+                arr.map((item) => {
+                if (item.isCorrect === true) {
+                    setSolution(item.content)
+                }
+                })
             })
             .catch((err) => console.log(err))
 

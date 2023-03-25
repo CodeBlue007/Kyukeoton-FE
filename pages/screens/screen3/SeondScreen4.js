@@ -36,7 +36,6 @@ const SecondScreen4 = ({ navigation }) => {
         if (isCorrect !== correct) {
             setCorrect(true)
         }
-        setSolution(name);//문제정답
         setIsModalVisible(true);
     }
 
@@ -48,6 +47,12 @@ const SecondScreen4 = ({ navigation }) => {
                 setfullItems(data);
                 setAnswerList(data.answers);
                 setLoading(false);
+                const arr = data.answers
+                arr.map((item) => {
+                if (item.isCorrect === true) {
+                    setSolution(item.content)
+                }
+                })
             })
             .catch((err) => console.log(err))
 

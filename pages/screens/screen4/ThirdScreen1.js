@@ -29,7 +29,6 @@ const ThirdScreen1 = ({ navigation }) => {
         if (isCorrect !== correct) {
             setCorrect(true)
         }
-        setSolution(name);
         setIsModalVisible(true);
     }
 
@@ -40,6 +39,12 @@ const ThirdScreen1 = ({ navigation }) => {
         setfullItems(data);
         setAnswerList(data.answers);
         setLoading(false);
+        const arr = data.answers
+                arr.map((item) => {
+                if (item.isCorrect === true) {
+                    setSolution(item.content)
+                }
+                })
     }
 
     const countClosure = () => {
