@@ -3,12 +3,14 @@ import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpac
 import React, {useState} from 'react';
 import Select from "./Select";
 import {LinearGradient} from "expo-linear-gradient"
-
+import Modall from "../../components/Modall";
+import ProgressBar from "../../components/ProgressBar"
 
 
 function DetailsScreen2({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [correct,setCorrect] = useState(false);
+  const [solution,setSolution] = useState('')
   const [ques,setQues] =useState([
     {
       "name": "호랑이",
@@ -48,19 +50,12 @@ function DetailsScreen2({ navigation }) {
   ])
 
 
-    const onClick = useCallback(() => {
-      navigation.navigate("Details3");
-    }, [navigation]);
-
-    const close = ()=>{
-      setIsModalVisible(false)
-    }
-
-
-    const compare=(isCorrect)=>{
+ 
+    const compare=(isCorrect,name)=>{
         if(isCorrect !== correct){
           setCorrect(true)
         }
+        setSolution(name)
         setIsModalVisible(true)
       }
 
@@ -77,14 +72,14 @@ function DetailsScreen2({ navigation }) {
 
             <View style={{ flexDirection:'row'}}>
               {ques.slice(0,2).map((val)=>
-                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                  <TouchableHighlight  style={styles.container}>
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
             </View>
             <View style={{ flexDirection:'row'}}>
               {ques.slice(2,4).map((val)=>
-                  <TouchableHighlight  style={styles.container} onPress={onClick}>
+                  <TouchableHighlight  style={styles.container} >
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
@@ -96,7 +91,7 @@ function DetailsScreen2({ navigation }) {
                 {answer.slice(0,2).map((val)=>
                     <TouchableOpacity
                     style={styles.button}
-                    onPress={() => compare(val.isCorrect)}
+                    onPress={() => compare(val.isCorrect,val.content)}
                         >
                     <Text style={styles.buttonText}>{val.content}</Text>
                     </TouchableOpacity>
@@ -107,37 +102,15 @@ function DetailsScreen2({ navigation }) {
                 {answer.slice(2,4).map((val)=>
                     <TouchableOpacity
                     style={styles.button}
-                    onPress={() => compare(val.isCorrect)}
+                    onPress={() => compare(val.isCorrect,val.content)}
                         >
                     <Text style={styles.buttonText}>{val.content}</Text>
                     </TouchableOpacity>
                 )}
                 </View>
               </View>
-            <Modal
-              animationType={"slide"}
-              style={{width:40,height:10}}
-              transparent={true}
-              visible={isModalVisible}
-              onRequestClose={() => {
-                  isModalVisible(!isModalVisible)
-              }}
-          >
-              <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>{correct?'정답입니다.':'오답이에요'}</Text>
-              <Text style={styles.modalText1}>{correct?'참 잘했어요':'정답 : 눈사람'}</Text>
-              <Pressable
-                style={correct?[styles.button1, styles.buttonClose]:[styles.button1, styles.button1Close]}
-                onPress={()=>{
-                  close()
-                  onClick()
-                }}>
-                <Text style={styles.textStyle}>계속하기</Text>
-              </Pressable>
-            </View>
-          </View>
-          </Modal>
+              <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details3"} navigation={navigation} solution={solution}/>
+              <ProgressBar curNum={3} backGroundProp={'#0061C1'} />
         </View>
       </LinearGradient>
     );

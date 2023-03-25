@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpacity,} from "react-native";
+import { Text, TouchableHighlight, Modal,StyleSheet,View,Pressable,TouchableOpacity,Image} from "react-native";
 import React, {useState} from 'react';
 import Select from "./Select";
 import {LinearGradient} from "expo-linear-gradient"     
@@ -40,7 +40,19 @@ function LastScreen({ navigation }) {
                 <View style={styles.centeredView1}>
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>문제를 푸는데 </Text>
-                <Text style={styles.modalText}>@ 총 <Text style={{color:"#3498DB"}}>44초</Text>가 걸렸어요 @</Text>
+                <View>
+                    <Text style={styles.modalText1}>
+                    <Image
+                        style={styles.tinyLogo2}
+                        source={require('../../../assets/yes1.png')}
+                        />
+                        총 <Text style={{color:"#3498DB"}}>44초</Text>가 걸렸어요
+                        <Image
+                        style={styles.tinyLogo2}
+                        source={require('../../../assets/yes1.png')}
+                        />
+                    </Text>
+                </View>
                 <View style={{display:'flex',flexDirection:'row', width:270,justifyContent:'space-between'}}>
                     <Pressable
                     style={styles.button1}
@@ -76,6 +88,10 @@ function LastScreen({ navigation }) {
       position:"relative",
     
      
+    },
+    tinyLogo2:{
+        width:20,
+        height:20
     },
   
     centeredView1: {
@@ -149,7 +165,7 @@ function LastScreen({ navigation }) {
         
       },
     modalText: {
-      marginBottom: 15,
+      marginBottom: 0,
       textAlign: 'center',
       fontSize:20,
       fontStyle: 'normal',
@@ -157,6 +173,17 @@ function LastScreen({ navigation }) {
         fontSize: 24,
         lineHeight: 34 
     },
+    modalText1: {
+        marginBottom: 15,
+        textAlign: 'center',
+        
+        fontStyle: 'normal',
+          fontWeight: 700,
+          fontSize: 24,
+          lineHeight: 34 ,
+          display:'flex',
+          flexDirection:'row'
+      },
   });
   
 //  const styles = StyleSheet.create({
