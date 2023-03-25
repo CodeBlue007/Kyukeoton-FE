@@ -17,23 +17,51 @@ export const Screen3Style = StyleSheet.create({
         fontSize: 24,
         marginTop: 40,
         marginBottom: 30,
+        color: '#FFFFFF',
+
+    },
+    ImgBox: {
+        backgroundColor: "#FFFFFF",
+        width: 300,
+        height: 300,
+        marginBottom: 25,
+    },
+
+    subTitle: {
+        borderBottomWidth: 2,
+        borderStyle: 'solid',
+        borderBottomColor: '#3C3C3C',
+        height: 30,
+        fontSize: 18,
+        fontWeight: "bold",
     },
 
     content: {
-        width: 339,
+        width: 350,
         height: 350,
         marginBottom: 40,
-        backgroundColor: '#D9D9D9',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 20,
+    },
+    line: {
+        fontWeight: 'bold',
+        marginTop: 20,
     },
 
     contentBox: {
         display: "flex",
         flexDirection: "row",
         marginTop: 15,
+    },
+
+    contentLabel: {
+        flex: 1,
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
 
     contentText: {
