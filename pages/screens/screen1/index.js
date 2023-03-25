@@ -59,7 +59,7 @@ function HomeScreen({ navigation }) {
         style={styles.tinyLogo2}
         source={require('../../../assets/yes2.png')}
         />
-    <View style={{ flex: 1, alignItems: "center",justifyContent: "center"}}>
+    <View style={{ flex: 1, alignItems: "center",justifyContent: "center",zIndex:7}}>
         <ListItem.Accordion
           content={
       
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
 },
 tinyLogo3:{
   width:142,
-  height:220,
+  height:234,
   bottom:60,
   left:200,
   zIndex:5,
