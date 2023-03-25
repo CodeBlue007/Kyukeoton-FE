@@ -73,6 +73,24 @@ function DetailsScreen3({ navigation }) {
     return durationCleanup.cleanUpFn();
   }, [])
 
+  useEffect(() => {
+    axios.get('http://13.124.233.9:8080/categories/3/questions?page=3')
+      .then(function (response) {
+        console.log(response.data);
+        setQues(response.data.questionImages)
+        setContents(response.data.content)
+        setAnswer(response.data.answers)
+        const arr = response.data.answers
+        arr.map((item) => {
+          if (item.isCorrect === true) {
+            setSolution(item.content)
+          }
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
 
   return (
     <LinearGradient
@@ -80,8 +98,8 @@ function DetailsScreen3({ navigation }) {
       style={styles.container1}
     >
       <View style={{ position: 'relative', flex: 1, alignItems: "center" }}>
-        <Text style={styles.title1}>마지막문제</Text>
-        <Text style={styles.title2}>계절</Text>
+        <Text style={styles.title1}>{contents.substring(0, 19)}</Text>
+        <Text style={styles.title2}>{contents.substring(19, 24)}</Text>
         <View style={styles.selectImg}>
 
           <View style={{ flexDirection: 'row' }}>
@@ -107,7 +125,7 @@ function DetailsScreen3({ navigation }) {
             {answer.slice(0, 2).map((val) =>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => compare(val.isCorrect, val.content)}
+                onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
               </TouchableOpacity>
@@ -118,7 +136,7 @@ function DetailsScreen3({ navigation }) {
             {answer.slice(2, 4).map((val) =>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => compare(val.isCorrect, val.content)}
+                onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
               </TouchableOpacity>

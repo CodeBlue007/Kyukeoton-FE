@@ -19,44 +19,43 @@ function DetailsScreen({ navigation }) {
   const [solution, setSolution] = useState('');
   const [durationTime, setDurationTime] = useRecoilState(DurationTime);
   const [durationCleanup, setDurationCleanup] = useRecoilState(DurationCleanUp);
-
-
+  const [contents, setContents] = useState('')
   const [ques, setQues] = useState([
-    {
-      "name": "호랑이",
-      "url": "456"
-    },
-    {
-      "name": "토끼",
-      "url": "4567"
-    },
-    {
-      "name": "원숭이",
-      "url": "45678"
-    },
-    {
-      "name": "?",
-      "url": "456749"
-    }
+    // {
+    //   "name": "호랑이",
+    //   "url": "456"
+    // },
+    // {
+    //   "name": "토끼",
+    //   "url": "4567"
+    // },
+    // {
+    //   "name": "원숭이",
+    //   "url": "45678"
+    // },
+    // {
+    //   "name": "?",
+    //   "url": "456749"
+    // }
   ])
 
   const [answer, setAnswer] = useState([
-    {
-      "content": "사자",
-      "isCorrect": false
-    },
-    {
-      "content": "물고기",
-      "isCorrect": true
-    },
-    {
-      "content": "새",
-      "isCorrect": false
-    },
-    {
-      "content": "오리",
-      "isCorrect": false
-    }
+    // {
+    //   "content": "사자",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "물고기",
+    //   "isCorrect": true
+    // },
+    // {
+    //   "content": "새",
+    //   "isCorrect": false
+    // },
+    // {
+    //   "content": "오리",
+    //   "isCorrect": false
+    // }
   ])
 
 
@@ -83,10 +82,21 @@ function DetailsScreen({ navigation }) {
   };
 
 
+
+
   useEffect(() => {
-    axios.get('http://13.124.233.9:8080/categories/3/questions?page=2')
+    axios.get('http://13.124.233.9:8080/categories/3/questions?page=0')
       .then(function (response) {
         console.log(response.data);
+        setQues(response.data.questionImages)
+        setContents(response.data.content)
+        setAnswer(response.data.answers)
+        const arr = response.data.answers
+        arr.map((item) => {
+          if (item.isCorrect === true) {
+            setSolution(item.content)
+          }
+        })
       })
       .catch(function (error) {
         console.log(error);
@@ -97,15 +107,18 @@ function DetailsScreen({ navigation }) {
   }, [])
 
 
+
   return (
     <LinearGradient
       colors={['#0091EA', '#9EDAFF']}
       style={styles.container1}
     >
       <View style={{ position: 'relative', flex: 1, alignItems: "center" }}>
-        <Text style={styles.title1}>‘?’에 적합한 그림이 무엇일까요?</Text>
-        <Text style={styles.title2}>계절</Text>
+        <Text style={styles.title1}>{contents.substring(0, 19)}</Text>
+        <Text style={styles.title2}>{contents.substring(19, 24)}</Text>
         <View style={styles.selectImg}>
+
+
 
           <View style={{ flexDirection: 'row' }}>
             {ques.slice(0, 2).map((val) =>
@@ -122,7 +135,34 @@ function DetailsScreen({ navigation }) {
             )}
           </View>
 
-        </View>
+
+          <View style={styles.btn}>
+            <View style={{ flexDirection: 'row' }}>
+              {answer.slice(0, 2).map((val) =>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => compare(val.isCorrect)}
+                >
+                  <Text style={styles.buttonText}>{val.content}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+              {answer.slice(2, 4).map((val) =>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => compare(val.isCorrect)}
+                >
+                  <Text style={styles.buttonText}>{val.content}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+          </View>
+          <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details1"} navigation={navigation} solution={solution} />
+          <ProgressBar curNum={1} backGroundProp={'#0061C1'} />
+        </View >
 
         <View style={styles.btn}>
           <View style={{ flexDirection: 'row' }}>
@@ -150,9 +190,9 @@ function DetailsScreen({ navigation }) {
         </View>
         <Modall isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} correct={correct} next={"Details1"} navigation={navigation} solution={solution} />
         <ProgressBar curNum={1} backGroundProp={'#0061C1'} />
-      </View>
+      </View >
 
-    </LinearGradient>
+    </LinearGradient >
   );
 }
 

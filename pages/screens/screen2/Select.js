@@ -7,7 +7,10 @@ const Select = ({data}) => {
           <View>
             <Image
                     style={styles.tinyLogo}
-                    source={require('../../../assets/favicon.png')}
+                    source={{
+                      uri: data.url,
+                    }}
+
                     />
           </View>
           <Text style={styles.text}>{data.name}</Text>
