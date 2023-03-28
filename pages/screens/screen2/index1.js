@@ -91,15 +91,15 @@ function DetailsScreen1({ navigation }) {
         <View style={styles.selectImg}>
 
           <View style={{ flexDirection: 'row' }}>
-            {ques.slice(0, 2).map((val) =>
-              <TouchableHighlight style={styles.container} >
+            {ques.slice(0, 2).map((val,idx) =>
+              <TouchableHighlight style={styles.container} key={idx}>
                 <Select data={val} />
               </TouchableHighlight>
             )}
           </View>
           <View style={{ flexDirection: 'row' }}>
-            {ques.slice(2, 4).map((val) =>
-              <TouchableHighlight style={styles.container} >
+            {ques.slice(2, 4).map((val,idx) =>
+              <TouchableHighlight style={styles.container} key={idx}>
                 <Select data={val} />
               </TouchableHighlight>
             )}
@@ -107,10 +107,10 @@ function DetailsScreen1({ navigation }) {
         </View>
         <View style={styles.btn}>
           <View style={{ flexDirection: 'row' }}>
-            {answer.slice(0, 2).map((val) =>
+            {answer.slice(0, 2).map((val,idx) =>
               <TouchableOpacity
                 style={styles.button}
-
+                key={idx}
                 onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>
@@ -118,10 +118,10 @@ function DetailsScreen1({ navigation }) {
             )}
           </View>
           <View style={{ flexDirection: 'row' }}>
-            {answer.slice(2, 4).map((val) =>
+            {answer.slice(2, 4).map((val,idx) =>
               <TouchableOpacity
                 style={styles.button}
-
+                key={idx}
                 onPress={() => compare(val.isCorrect)}
               >
                 <Text style={styles.buttonText}>{val.content}</Text>

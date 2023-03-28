@@ -114,15 +114,15 @@ function DetailsScreen({ navigation }) {
         <View style={styles.selectImg}>
 
           <View style={{ flexDirection:'row'}}>
-              {ques.slice(0,2).map((val)=>
-                  <TouchableHighlight  style={styles.container} >
+              {ques.slice(0,2).map((val,idx)=>
+                  <TouchableHighlight key={idx} style={styles.container} >
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
             </View>
             <View style={{ flexDirection:'row'}}>
-              {ques.slice(2,4).map((val)=>
-                  <TouchableHighlight  style={styles.container} >
+              {ques.slice(2,4).map((val,idx)=>
+                  <TouchableHighlight  key={idx} style={styles.container} >
                     <Select data={val}/>
                   </TouchableHighlight>
               )}
@@ -131,8 +131,9 @@ function DetailsScreen({ navigation }) {
 
           <View style={styles.btn}>
             <View style={{ flexDirection: 'row' }}>
-              {answer.slice(0, 2).map((val) =>
+              {answer.slice(0, 2).map((val,idx) =>
                 <TouchableOpacity
+                  key={idx} 
                   style={styles.button}
                   onPress={() => compare(val.isCorrect)}
                 >
@@ -142,8 +143,9 @@ function DetailsScreen({ navigation }) {
             </View>
 
             <View style={{ flexDirection: 'row' }}>
-              {answer.slice(2, 4).map((val) =>
+              {answer.slice(2, 4).map((val,idx) =>
                 <TouchableOpacity
+                  key={idx} 
                   style={styles.button}
                   onPress={() => compare(val.isCorrect)}
                 >

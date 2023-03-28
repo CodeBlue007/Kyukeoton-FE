@@ -39,7 +39,6 @@ const SecondScreen3 = ({ navigation }) => {
     useEffect(() => {
         axios.get(`http://13.124.233.9:8080/categories/5/questions?page=2`)
             .then(({ data }) => {
-                console.log(data);
                 setfullItems(data);
                 setAnswerList(data.answers);
                 setLoading(false);
