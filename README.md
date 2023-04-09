@@ -14,8 +14,8 @@
 
 ## 2. 기술스택
 
-- FE : React Native, Recoil, axios, styled-components
-- BE : Java Spring 
+- FE : React Native, Recoil, axios, styled-components, React-Navigation
+- BE : Java Spring, Docker, AWS
 
 
 ## 3. 시연영상
